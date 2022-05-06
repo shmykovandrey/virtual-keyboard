@@ -1,4 +1,5 @@
 export default function renderMainElemnents() {
+  const BODY = document.querySelector('body');
   let wrapper = document.createElement('div');
   wrapper.classList.add('wrapper');
   let textArea = document.createElement('textarea');
@@ -10,5 +11,6 @@ export default function renderMainElemnents() {
   let div = document.createElement('div');
   div.classList.add('keyboard');
   wrapper.append(div);
-  return wrapper;
+  BODY.append(wrapper);
+  return undefined;
 }
