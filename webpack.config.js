@@ -8,7 +8,7 @@ module.exports = (env, options) => {
   const isProdaction = options.mode === 'prodaction';
   const config = {
     mode: isProdaction ? 'prodaction' : 'development',
-    entry: ['./index.js', './src/sass/index.scss'],
+    entry: ['./index.js', './src/index.scss'],
     devtool: 'source-map',
     output: {
       path: path.join(__dirname, '/dist'),

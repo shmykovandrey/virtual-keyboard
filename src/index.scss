@@ -14,7 +14,8 @@
 .text-area {
   display: block;
   margin: 0px auto;
-  font-size: 20px;
+  font-size: 22px;
+  padding: 10px;
 }
 
 .keyboard {
@@ -35,8 +36,14 @@
   border: 2px solid black;
   border-radius: 5px;
   text-align: center;
-  padding-top: 10px;
+  padding-top: 3px;
   grid-column: span 2;
+  font-size: 25px;
+
+  &:hover {
+    pointer-events: none;
+    cursor: default;
+  }
 }
 
 .keyboard_empty {
@@ -56,4 +63,10 @@
 .space {
   grid-column: span 11;
   width: 100%;
+}
+
+.click {
+  background-color: green;
+  border-radius: 100px;
+  transition: all 0.5s;
 }
