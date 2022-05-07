@@ -10,6 +10,12 @@ h1 {
   padding-bottom: 30px;
 }
 
+p {
+  text-align: center;
+  padding: 20px;
+  font-size: 25px;
+}
+
 .wrapper {
   margin: 0px auto;
   width: 1000px;
@@ -42,15 +48,10 @@ h1 {
   border: 2px solid black;
   border-radius: 5px;
   text-align: center;
-  padding-top: 3px;
+  padding-top: 0px;
   grid-column: span 2;
   font-size: 25px;
   box-shadow: #111;
-
-  &:hover {
-    pointer-events: none;
-    cursor: default;
-  }
 }
 
 .keyboard_empty {
@@ -87,7 +88,7 @@ h1 {
 }
 
 .click {
-  background-color: green;
+  background-color: powderblue;
   border-radius: 100px;
   transition: all 0.2s;
 }

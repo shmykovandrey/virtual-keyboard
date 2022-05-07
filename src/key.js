@@ -1,5 +1,5 @@
 const controlKey = new Set(['Backspace', 'Delete', 'Tab', 'CapsLock', 'Enter', 'ShiftLeft', 'ShiftRight', 'ControlLeft',
-  'AltLeft', 'Space', 'AltRight', 'ControlRight'
+  'AltLeft', 'Space', 'AltRight', 'ControlRight', 'MetaLeft'
 ]);
 const alphabetKey = new Set(['KeyQ', 'KeyW', 'KeyE', 'KeyR', 'KeyT', 'KeyY', 'KeyU', 'KeyI', 'KeyO', 'KeyP',
   'KeyA', 'KeyS', 'KeyD', 'KeyF', 'KeyG', 'KeyH', 'KeyJ', 'KeyK', 'KeyL',
@@ -84,9 +84,6 @@ export default class Key {
       case 'Space':
         div.classList.add('space');
         break;
-      case 'empty':
-        div.classList.add('keyboard_empty');
-        break;
       case 'ControlRight':
       case 'AltLeft':
         div.classList.add('onehalf');
@@ -149,13 +146,14 @@ export default class Key {
   }
 
   createTemplate() {
-    let div = document.createElement('div');
+    let div = document.createElement('button');
     div.classList.add('keyboard__key');
     if (controlKey.has(this.keyName)) {
       div.classList.add('control');
     }
     div = this.isPressed(div);
     div = this.setStyle(div);
+    div.setAttribute('id', this.keyName);
     if (alphabetKey.has(this.keyName)) {
       div = this.сreateAlphabetSymbol(div);
       return div;

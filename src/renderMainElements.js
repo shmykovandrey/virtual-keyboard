@@ -14,6 +14,9 @@ export default function renderMainElemnents() {
   let div = document.createElement('div');
   div.classList.add('keyboard');
   wrapper.append(div);
+  let text = document.createElement('p');
+  text.innerText = 'Клавиатура выполнена в Windows стиле, переключение между языками осуществляется с помощью клавиш Control + Shift';
+  wrapper.append(text);
   BODY.append(wrapper);
   return undefined;
 }

@@ -57,7 +57,7 @@ export default function generateAllKeys() {
   keyArr.push(new Key('ArrowUp', '↑'));
   keyArr.push(new Key('ShiftRight', 'shift'));
   keyArr.push(new Key('ControlLeft', 'ctrl'));
-  keyArr.push(new Key('empty', ''));
+  keyArr.push(new Key('MetaLeft', 'win'));
   keyArr.push(new Key('AltLeft', 'alt'));
   keyArr.push(new Key('Space', 'space'));
   keyArr.push(new Key('AltRight', 'alt'));
