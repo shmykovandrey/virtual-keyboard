@@ -6,9 +6,10 @@ const alphabetKey = new Set(['KeyQ', 'KeyW', 'KeyE', 'KeyR', 'KeyT', 'KeyY', 'Ke
   'KeyZ', 'KeyX', 'KeyC', 'KeyV', 'KeyB', 'KeyN', 'KeyM'
 ]);
 const specialSymbol = new Set(['Backquote', 'Minus', 'Equal', 'BracketLeft', 'BracketRight', 'Backslash',
-  'Semicolon', 'Quote', 'Comma', 'Period', 'Slash', 'Digit1', 'Digit2', 'Digit3', 'Digit4', 'Digit5', 'Digit6', 'Digit7',
+  'Slash', 'Digit1', 'Digit2', 'Digit3', 'Digit4', 'Digit5', 'Digit6', 'Digit7',
   'Digit8', 'Digit9', 'Digit0'
 ]);
+const diffKey = new Set(['Semicolon', 'Quote', 'Comma', 'Period']);
 
 export default class Key {
   constructor(
@@ -23,9 +24,12 @@ export default class Key {
     this.keyShiftSymbol = keyShiftSymbol;
     this.keyLangSymbol = keyLangSymbol;
     this.keyLangShiftSymbol = keyLangShiftSymbol;
-    this.russian = false;
+    if (localStorage.russian === 'false' || localStorage.russian === undefined) {
+      this.russian = false;
+    } else this.russian = true;
     this.pressed = false;
     this.shifted = false;
+    this.capsed = false;
   }
 
   setPressed() {
@@ -44,6 +48,19 @@ export default class Key {
     this.shifted = false;
   }
 
+  setCapsed() {
+    this.capsed = true;
+  }
+
+  setUncapsed() {
+    this.capsed = false;
+  }
+
+  switchLang() {
+    this.russian = !this.russian;
+    localStorage.russian = this.russian;
+  }
+
   renderKey() {
     const domParrent = document.querySelector('.keyboard');
     domParrent.append(this.createTemplate());
@@ -60,12 +77,8 @@ export default class Key {
 
   setStyle(div) {
     switch (this.keyName) {
-      case 'Backspace':
-      case 'Enter':
-      case 'CapsLock':
-      case 'ShiftLeft':
-      case 'ShiftRight':
       case 'ControlLeft':
+      case 'Tab':
         div.classList.add('double');
         break;
       case 'Space':
@@ -75,9 +88,17 @@ export default class Key {
         div.classList.add('keyboard_empty');
         break;
       case 'ControlRight':
-      case 'Backslash':
-      case 'Tab':
+      case 'AltLeft':
         div.classList.add('onehalf');
+        break;
+      case 'ShiftLeft':
+      case 'ShiftRight':
+      case 'Enter':
+      case 'CapsLock':
+        div.classList.add('doublehalf');
+        break;
+      case 'Backspace':
+        div.classList.add('triple');
         break;
       default:
         div.classList.add('basic_key');
@@ -85,7 +106,33 @@ export default class Key {
     return div;
   }
 
-  сreateShiftedSymbol(div) {
+  сreateAlphabetSymbol(div) {
+    let newDiv = div;
+    if (this.russian === false) {
+      if (this.capsed) {
+        newDiv.textContent = this.keyShiftSymbol;
+        return newDiv;
+      }
+      if (!this.shifted) {
+        newDiv.textContent = this.keySymbol;
+      } else {
+        newDiv.textContent = this.keyShiftSymbol;
+      }
+    } else {
+      if (this.capsed) {
+        newDiv.textContent = this.keyLangShiftSymbol;
+        return newDiv;
+      }
+      if (!this.shifted) {
+        newDiv.textContent = this.keyLangSymbol;
+      } else {
+        newDiv.textContent = this.keyLangShiftSymbol;
+      }
+    }
+    return newDiv;
+  }
+
+  сreateSpecialSymbol(div) {
     let newDiv = div;
     if (this.russian === false) {
       if (!this.shifted) {
@@ -110,11 +157,17 @@ export default class Key {
     div = this.isPressed(div);
     div = this.setStyle(div);
     if (alphabetKey.has(this.keyName)) {
-      div = this.сreateShiftedSymbol(div);
+      div = this.сreateAlphabetSymbol(div);
       return div;
     }
     if (specialSymbol.has(this.keyName)) {
-      div = this.сreateShiftedSymbol(div);
+      div = this.сreateSpecialSymbol(div);
+      return div;
+    }
+    if (diffKey.has(this.keyName)) {
+      if (this.russian) {
+        div = this.сreateAlphabetSymbol(div);
+      } else div = this.сreateSpecialSymbol(div);
       return div;
     }
     div.textContent = this.keySymbol;
