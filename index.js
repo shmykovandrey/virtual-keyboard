@@ -21,7 +21,7 @@ function reRenderKeyBoard() {
 }
 
 function keysPreventDefault(event) {
-  if (event.code === 'Tab' || event.code === 'AltRight' || event.code === 'AltLeft' || event.code === 'Backspace' || event.code === 'Delete') event.preventDefault();
+  if (event.code === 'Enter' || event.code === 'Tab' || event.code === 'AltRight' || event.code === 'AltLeft' || event.code === 'Backspace' || event.code === 'Delete') event.preventDefault();
   if (alphabetKey.has(event.code) || specialSymbol.has(event.code)) event.preventDefault();
 }
 
@@ -64,6 +64,12 @@ function switchLangCheck() {
 
 function printKey(key) {
   const textArea = document.querySelector('.text-area');
+  if (key === 'Enter') {
+    textArea.setRangeText('\n');
+    textArea.selectionEnd += 1;
+    textArea.selectionStart += 1;
+    return;
+  }
   if (key === 'Space') {
     textArea.setRangeText(' ');
     textArea.selectionEnd += 1;
@@ -138,7 +144,7 @@ function mouseUp(event) {
   if (event.target.id === 'ShiftLeft' || event.target.id === 'ShiftRight') unshifter();
   if (event.target.id === 'CapsLock') {
     isCapsed(event.target.id);
-  } else unpressed(event.target.id);
+  } else KEYS.filter(key => key.keyName !== 'CapsLock').forEach(key => unpressed(key.keyName));
   reRenderKeyBoard();
 }
 
