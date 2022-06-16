@@ -5,11 +5,11 @@ const alphabetKey = new Set(['KeyQ', 'KeyW', 'KeyE', 'KeyR', 'KeyT', 'KeyY', 'Ke
   'KeyA', 'KeyS', 'KeyD', 'KeyF', 'KeyG', 'KeyH', 'KeyJ', 'KeyK', 'KeyL',
   'KeyZ', 'KeyX', 'KeyC', 'KeyV', 'KeyB', 'KeyN', 'KeyM'
 ]);
-const specialSymbol = new Set(['Backquote', 'Minus', 'Equal', 'BracketLeft', 'BracketRight', 'Backslash',
+const specialSymbol = new Set(['Minus', 'Equal', 'BracketLeft', 'BracketRight', 'Backslash',
   'Slash', 'Digit1', 'Digit2', 'Digit3', 'Digit4', 'Digit5', 'Digit6', 'Digit7',
   'Digit8', 'Digit9', 'Digit0'
 ]);
-const diffKey = new Set(['Semicolon', 'Quote', 'Comma', 'Period']);
+const diffKey = new Set(['Semicolon', 'Quote', 'Comma', 'Period', 'Backquote']);
 
 export default class Key {
   constructor(

@@ -6,6 +6,7 @@
   "scripts": {
     "build": "webpack --config webpack.config.js",
     "dev": "webpack-dev-server --mode development",
+    "lint": "eslint --fix",
     "prod": "webpack --mode production"
   },
   "repository": {
