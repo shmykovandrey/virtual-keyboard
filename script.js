@@ -1045,7 +1045,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 window.onload = function onloadPage() {
-  console.log('hello');
   (0,_src_renderMainElements__WEBPACK_IMPORTED_MODULE_0__["default"])();
   (0,_src_mainLogic__WEBPACK_IMPORTED_MODULE_1__["default"])();
 };
